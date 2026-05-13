@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Killing ghost detections in real-time LiDAR + YOLO fusion on iPhone — Daisuke Majima</title>
+<meta name="description" content="Why ARKit's sceneDepth confidence mask is the most underused signal in iOS depth work — and how it took my retail-vision app from 60% to 88% recognition during camera motion.">
+<meta property="og:title" content="Killing ghost detections in real-time LiDAR + YOLO fusion on iPhone">
+<meta property="og:description" content="Three fixes that took recognition rate from 60% to 88% during motion. ARKit sceneDepth confidence-mask, per-anchor exponential decay tracker, per-zone YOLO thresholds.">
+<meta property="og:url" content="https://john-rocky.github.io/blog/lidar-yolo-ghost-detections.html">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;font-size:17px;line-height:1.65;color:#1d1d1f;background:#fbfbfd;-webkit-font-smoothing:antialiased}
+a{color:#0066cc;text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:720px;margin:0 auto;padding:48px 24px}
+@media(min-width:768px){.wrap{padding:80px 32px}}
+.back{font-size:14px;color:#86868b;margin-bottom:32px;display:inline-block}
+h1{font-size:32px;line-height:1.2;margin:0 0 12px;font-weight:700;letter-spacing:-0.02em}
+@media(min-width:768px){h1{font-size:40px}}
+.byline{color:#86868b;font-size:14px;margin:0 0 36px}
+.byline a{color:#86868b;text-decoration:underline}
+h2{font-size:22px;margin:48px 0 16px;font-weight:600;letter-spacing:-0.01em}
+h3{font-size:18px;margin:32px 0 12px;font-weight:600}
+p{margin:0 0 18px}
+ul,ol{margin:0 0 18px;padding-left:24px}
+li{margin-bottom:6px}
+strong{font-weight:600}
+hr{border:0;border-top:1px solid #d2d2d7;margin:48px 0}
+pre{background:#f5f5f7;border-radius:8px;padding:16px 20px;overflow-x:auto;font-size:14px;line-height:1.5;margin:0 0 24px;border:1px solid #e5e5ea}
+code{font-family:"SF Mono",Menlo,Monaco,Consolas,monospace;font-size:0.92em;background:#f5f5f7;padding:1px 6px;border-radius:4px}
+pre code{background:transparent;padding:0}
+.cta{
+  background:#1d1d1f;color:#fff;border-radius:16px;padding:32px;margin:48px 0 0;
+}
+.cta h3{color:#fff;margin:0 0 12px;font-size:20px}
+.cta p{color:#d2d2d7;margin-bottom:16px}
+.cta ul{color:#d2d2d7;padding-left:20px}
+.cta a{color:#fff;text-decoration:underline}
+footer{margin-top:64px;padding-top:32px;border-top:1px solid #e5e5ea;color:#86868b;font-size:13px;text-align:center}
+@media (prefers-color-scheme: dark){
+  body{background:#000;color:#f5f5f7}
+  a{color:#0a84ff}
+  .back,.byline,footer{color:#86868b}
+  .byline a{color:#86868b}
+  pre,code{background:#1c1c1e;border-color:#38383a}
+  hr,footer{border-color:#38383a}
+  .cta{background:#1c1c1e}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a href="/" class="back">← Daisuke Majima</a>
+
+<h1>Killing ghost detections in real-time LiDAR + YOLO fusion on iPhone</h1>
+<p class="byline">By <a href="/">Daisuke Majima</a> · 2026-05-13</p>
+
+<p>When you fuse iPhone LiDAR depth with a YOLO bounding box, the obvious thing to do is intersect them: project the box into the depth map, sample the median depth, and trust that.</p>
+<p>I shipped that. It worked beautifully when the camera was still — and produced <strong>ghost objects everywhere</strong> when the camera was panning.</p>
+<p>Recognition rate on a real warehouse pilot dropped from 85% steady-state to roughly 60% during motion. This is the story of the three fixes that brought it back to 88%.</p>
+<p>This post is iOS / CoreML / ARKit / LiDAR-specific. I maintain <a href="https://github.com/john-rocky/CoreML-Models" target="_blank" rel="noopener">CoreML-Models</a> (1,749★) — the de-facto iOS Core ML model zoo. The retail-vision app described here is the production iOS app I've been solo-leading for 6 months.</p>
+
+<hr>
+
+<h2>The setup</h2>
+<ul>
+<li><strong>Hardware</strong>: iPhone 15 Pro, LiDAR sensor.</li>
+<li><strong>Model</strong>: YOLOv8n converted via <a href="https://github.com/apple/coremltools" target="_blank" rel="noopener">coremltools</a>, running on the Neural Engine. ~6ms per inference.</li>
+<li><strong>Depth</strong>: ARKit <code>sceneDepth</code> at 256×192 resolution (landscape).</li>
+<li><strong>Latency budget</strong>: &lt;200ms end-to-end (capture → classify → fuse → display).</li>
+<li><strong>Workflow</strong>: Warehouse worker pans the iPhone across a shelf; the app detects SKUs and snaps them to physical bins via depth.</li>
+</ul>
+
+<h2>The bug</h2>
+<p>Bounding boxes near the edges of the frame produced detections that didn't exist in the real world — most often during camera motion. The downstream "match this SKU to a bin" code happily assigned these ghost detections to real bins, displacing the genuine SKU.</p>
+<p>Symptom: SKU recognition rate visibly degraded during pans, returning to baseline when the camera was still.</p>
+
+<h2>What didn't work</h2>
+
+<p><strong>Hypothesis 1: YOLO is firing on the wrong things during motion blur.</strong></p>
+<p>I bumped the YOLO confidence threshold from <code>0.40</code> to <code>0.55</code>.</p>
+<p>Result: recognition rate dropped <em>further</em>, to ~55%. The high threshold cut too many real-but-faint detections without solving the ghost problem. Reverted.</p>
+
+<p><strong>Hypothesis 2: Just debounce — require N consecutive frames to confirm a detection.</strong></p>
+<p>I added N=3 frame debounce.</p>
+<p>Result: ghost detections did go away, but real detections now appeared with a visible 100-150ms lag during scans. Worker complaint: <em>"too slow"</em>. Reverted.</p>
+
+<p><strong>Hypothesis 3: Tighten the per-anchor IoU threshold for the depth-to-detection match.</strong></p>
+<p>Result: marginal improvement, but most ghost detections were already passing the IoU check because they happened to be in plausible spatial locations. Marginal fix, kept.</p>
+
+<p>Neither hypothesis was <em>wrong</em>, exactly. But none of them addressed why the camera-motion case produced bad depth.</p>
+
+<h2>What worked: looking at the confidence mask</h2>
+<p>When I dumped the actual depth data per-pixel during a pan, I noticed the depth values weren't completely wrong — they were just <em>unconfident</em>. ARKit's <code>sceneDepth</code> ships with a per-pixel confidence channel (<code>ARConfidenceLevel</code>: <code>low</code> / <code>medium</code> / <code>high</code>) that most fusion code ignores entirely.</p>
+<p>At the edges of the frame, during motion, low-confidence pixels dominated. The median depth I was computing was therefore being driven by garbage.</p>
+
+<p><strong>Fix 1</strong>: Mask out <code>low</code> confidence pixels before computing per-detection median depth.</p>
+
+<pre><code>// Before
+let depths = pixelsInBox.map { depthMap[$0] }
+let medianDepth = depths.median()
+
+// After
+let depths = pixelsInBox
+    .filter { confidenceMap[$0] != .low }
+    .map { depthMap[$0] }
+
+// If &lt;30% high-or-medium-confidence pixels remain, abstain from depth fusion
+guard depths.count &gt; pixelsInBox.count / 3 else {
+    detection.depth = nil  // surface to the UI as "uncertain"
+    continue
+}
+let medianDepth = depths.median()</code></pre>
+
+<p>The "abstain" branch turned out to be more important than the masking. Telling the system <em>"I don't know"</em> let the upstream tracking handle the gap gracefully rather than feeding garbage downstream.</p>
+<p>This alone bumped during-motion recognition from 60% → ~75%.</p>
+
+<h2>Fix 2: per-anchor exponential decay tracker</h2>
+<p>Once a SKU is recognized once and depth-fused once, you have a 3D anchor for it. Real detections should reinforce that anchor; ghosts should die out fast.</p>
+<p>I keep a per-anchor confidence that decays each frame and adds on reinforcement:</p>
+
+<pre><code>struct TrackedAnchor {
+    var lastSeenFrame: Int
+    var confidence: Float  // 0.0 to 1.0
+    var sku: String
+    var worldPosition: simd_float3
+}
+
+// Every frame:
+for anchor in trackedAnchors {
+    anchor.confidence *= 0.85  // decay factor
+}
+
+for detection in currentFrameDetections {
+    let matched = trackedAnchors.first {
+        distance($0.world, detection.world) &lt; 0.05
+    }
+    if let m = matched {
+        m.confidence = min(1.0, m.confidence + 0.3)  // reinforce
+        m.lastSeenFrame = currentFrame
+    } else {
+        // new anchor candidate; needs to reach 0.5 confidence before "real"
+        let newAnchor = TrackedAnchor(confidence: 0.3, ...)
+        trackedAnchors.append(newAnchor)
+    }
+}
+
+// Prune
+trackedAnchors.removeAll { $0.confidence &lt; 0.15 }</code></pre>
+
+<p>Ghost detections — typically single-frame events — never accumulate enough confidence to be promoted to "real". Real detections, even ones that flicker, persist long enough to dominate.</p>
+<p>Key insight: <strong>decay factor 0.85 with reinforcement 0.3</strong> means an anchor needs 2-3 reinforcing frames before it becomes "real", but only loses real-status after ~5 frames of silence. Asymmetric; intentional.</p>
+<p>This brought during-motion recognition to ~85%.</p>
+
+<h2>Fix 3: per-zone YOLO confidence thresholds</h2>
+<p>The remaining ghost detections clustered in specific image regions: corners and edges where depth quality is fundamentally worse.</p>
+<p>I split the frame into 9 zones (3×3 grid) and applied different YOLO confidence thresholds per zone:</p>
+
+<pre><code>func confidenceThreshold(for boundingBox: CGRect) -&gt; Float {
+    let centerX = boundingBox.midX
+    let centerY = boundingBox.midY
+
+    // Distance from frame center, 0.0 (center) to ~1.4 (corner)
+    let dx = abs(centerX - 0.5) * 2
+    let dy = abs(centerY - 0.5) * 2
+    let distFromCenter = sqrt(dx*dx + dy*dy)
+
+    // Linear interpolate: center=0.40, edges=0.55, corners=0.65
+    let baseThreshold: Float = 0.40
+    let edgePenalty: Float = 0.15 * Float(distFromCenter)
+    return baseThreshold + edgePenalty
+}</code></pre>
+
+<p>This isn't novel; what mattered was tying it to <em>depth quality</em> (which falls off at frame edges on iPhone LiDAR), not to <em>YOLO accuracy</em> (which is actually pretty uniform across the frame).</p>
+<p>This brought final during-motion recognition to <strong>88%</strong> — within margin-of-error of steady-state.</p>
+
+<h2>What I'd do differently</h2>
+<ul>
+<li><strong>Start with the confidence mask.</strong> I lost two weeks on hypothesis 1 and 2 before reading ARKit's documentation on <code>sceneDepth</code> carefully. The confidence channel is the single most underused signal in iOS depth work.</li>
+<li><strong>Visualize first.</strong> Dumping per-pixel depth + confidence to an overlay (just in a debug build) made the fix obvious in 20 minutes after weeks of fumbling.</li>
+<li><strong>Per-anchor tracking &gt; per-frame filtering.</strong> I tried frame-level filters first; they always traded latency for correctness. The tracker has neither cost because it's amortized across frames.</li>
+</ul>
+
+<h2>What this lets the rest of the app do</h2>
+<p>With ghost detections suppressed, downstream code can trust the detections. SKU → bin assignment runs with no skepticism. The user-visible behavior is "you scan, it just works". 70+ TestFlight builds in 6 months, 5 daily beta users, sub-200ms end-to-end on iPhone 15 Pro.</p>
+
+<div class="cta">
+<h3>Hire me</h3>
+<p>I'm a Senior iOS / On-Device ML Engineer based in Osaka, Japan. I'm currently solo-lead on the 94k-line production retail-vision iOS app this post is from.</p>
+<p>If you're building products with on-device ML — camera, AR, LiDAR, or on-device LLM — I'm <strong>open to Staff / Senior iOS or Mobile ML roles</strong>. Remote (JST), Tokyo/Osaka hybrid, or relocate with visa.</p>
+<ul>
+<li>👋 Hire-me: <a href="https://john-rocky.github.io">john-rocky.github.io</a></li>
+<li>📦 OSS: <a href="https://github.com/john-rocky/CoreML-Models">CoreML-Models</a> (1,749★), 134 repos</li>
+<li>📱 App Store: <a href="https://apps.apple.com/us/developer/daisuke-majima/id1350309854">10 apps under my own dev account</a></li>
+<li>✉️ rockyshikoku@gmail.com</li>
+</ul>
+</div>
+
+<footer>
+© Daisuke Majima · <a href="https://github.com/john-rocky">github.com/john-rocky</a>
+</footer>
+
+</div>
+</body>
+</html>
