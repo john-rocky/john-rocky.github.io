@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daisuke Majima — Senior iOS / On-Device ML Engineer</title>
+<meta name="description" content="Senior iOS / On-Device ML Engineer. Maintainer of CoreML-Models (1,745★). 10 apps on the App Store. ARKit + LiDAR + on-device LLM. Open to roles.">
+<meta property="og:title" content="Daisuke Majima — Senior iOS / On-Device ML Engineer">
+<meta property="og:description" content="CoreML-Models maintainer (1,745★) · 134 OSS repos · 10 App Store apps · 7+ years iOS / on-device ML. Open to Staff/Senior roles.">
+<meta property="og:url" content="https://john-rocky.github.io">
+<meta property="og:type" content="profile">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;font-feature-settings:"kern","liga"}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  color:#1d1d1f;
+  background:#fbfbfd;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:#0066cc;text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:880px;margin:0 auto;padding:48px 24px}
+@media(min-width:768px){.wrap{padding:80px 24px}}
+header h1{
+  font-size:40px;line-height:1.1;margin:0 0 8px;font-weight:700;letter-spacing:-0.02em;
+}
+@media(min-width:768px){header h1{font-size:56px}}
+.tagline{font-size:20px;color:#515154;margin:0 0 24px;font-weight:400}
+@media(min-width:768px){.tagline{font-size:24px}}
+.status{
+  display:inline-block;background:#e8f5e9;color:#1b5e20;
+  padding:6px 14px;border-radius:999px;font-size:14px;font-weight:500;
+  margin-bottom:32px;
+}
+.status::before{content:"●";color:#34a853;margin-right:6px}
+.contact{display:flex;flex-wrap:wrap;gap:16px;margin:24px 0 56px;font-size:15px}
+.contact a{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;background:#fff;border:1px solid #d2d2d7;border-radius:8px;
+  color:#1d1d1f;font-weight:500;
+}
+.contact a:hover{border-color:#1d1d1f;text-decoration:none}
+section{margin:56px 0}
+h2{
+  font-size:14px;text-transform:uppercase;letter-spacing:0.08em;
+  color:#86868b;font-weight:600;margin:0 0 24px;
+}
+h3{font-size:20px;margin:0 0 8px;font-weight:600}
+.highlight{
+  background:#fff;border:1px solid #d2d2d7;border-radius:16px;padding:32px;
+  margin:0 0 24px;
+}
+.highlight h3{font-size:22px}
+.stars{color:#f5a623;font-weight:600}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:600px){.grid{grid-template-columns:1fr 1fr}}
+.card{
+  background:#fff;border:1px solid #d2d2d7;border-radius:12px;padding:20px;
+  transition:border-color .15s,transform .15s;
+}
+.card:hover{border-color:#86868b}
+.card .meta{font-size:13px;color:#86868b;margin:0 0 8px;text-transform:uppercase;letter-spacing:0.04em;font-weight:600}
+.card h4{margin:0 0 8px;font-size:17px;font-weight:600}
+.card p{margin:0;font-size:14px;color:#515154;line-height:1.5}
+.card a{display:inline-block;margin-top:12px;font-size:14px;font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px}
+.tag{
+  font-size:12px;font-weight:500;color:#515154;background:#f5f5f7;
+  padding:5px 10px;border-radius:6px;
+}
+.timeline{border-left:2px solid #e5e5ea;padding-left:24px;margin-left:8px}
+.timeline-item{margin-bottom:28px;position:relative}
+.timeline-item::before{
+  content:"";position:absolute;left:-31px;top:8px;width:10px;height:10px;
+  background:#fff;border:2px solid #86868b;border-radius:50%;
+}
+.timeline-item.current::before{background:#34a853;border-color:#34a853}
+.timeline-item .when{font-size:13px;color:#86868b;margin:0 0 4px;font-weight:600}
+.timeline-item .what{font-size:17px;font-weight:600;margin:0 0 4px}
+.timeline-item .desc{font-size:14px;color:#515154;margin:0;line-height:1.5}
+.cta{
+  background:#1d1d1f;color:#fff;border-radius:20px;padding:48px 32px;text-align:center;
+  margin:64px 0 0;
+}
+.cta h2{color:#fff;margin-bottom:12px}
+.cta p{font-size:18px;margin:0 0 24px;color:#d2d2d7}
+.cta-btn{
+  display:inline-block;background:#fff;color:#1d1d1f;padding:14px 28px;
+  border-radius:999px;font-weight:600;font-size:16px;
+}
+.cta-btn:hover{text-decoration:none;background:#f5f5f7}
+footer{
+  margin-top:64px;padding-top:32px;border-top:1px solid #e5e5ea;
+  color:#86868b;font-size:13px;text-align:center;
+}
+.muted{color:#86868b}
+@media (prefers-color-scheme: dark){
+  body{background:#000;color:#f5f5f7}
+  .tagline{color:#a1a1a6}
+  a{color:#0a84ff}
+  .status{background:#0d2818;color:#4ade80}
+  .contact a{background:#1c1c1e;border-color:#38383a;color:#f5f5f7}
+  .contact a:hover{border-color:#f5f5f7}
+  h2{color:#86868b}
+  .highlight,.card{background:#1c1c1e;border-color:#38383a}
+  .card:hover{border-color:#86868b}
+  .card .meta,.card p,.timeline-item .desc,.tag{color:#a1a1a6}
+  .tag{background:#2c2c2e}
+  .timeline{border-color:#38383a}
+  .timeline-item::before{background:#1c1c1e;border-color:#86868b}
+  .cta{background:#1c1c1e}
+  footer{border-color:#38383a;color:#86868b}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="status">Open to Staff / Senior iOS or Mobile ML roles</span>
+  <h1>Daisuke Majima</h1>
+  <p class="tagline">Senior iOS / On-Device ML Engineer — Osaka, Japan.</p>
+
+  <div class="contact">
+    <a href="mailto:rockyshikoku@gmail.com">✉︎ rockyshikoku@gmail.com</a>
+    <a href="https://github.com/john-rocky" target="_blank" rel="noopener">⌗ github.com/john-rocky</a>
+    <a href="https://www.linkedin.com/in/daisuke-majima-43a637154/" target="_blank" rel="noopener">in/ daisuke-majima</a>
+    <a href="https://apps.apple.com/us/developer/daisuke-majima/id1350309854" target="_blank" rel="noopener">⌘ App Store</a>
+    <a href="https://twitter.com/JackdeS11" target="_blank" rel="noopener">@JackdeS11</a>
+  </div>
+</header>
+
+<section>
+  <div class="highlight">
+    <h3>What I do</h3>
+    <p>I take ML/CV/LLM research and ship it on phones, tablets, and AR devices — fast. I maintain <a href="https://github.com/john-rocky/CoreML-Models" target="_blank" rel="noopener"><strong>CoreML-Models</strong> <span class="stars">★ 1,745</span></a>, the de-facto iOS CoreML model zoo. 134 OSS repos covering YOLO / SAM / LaMa / on-device LLM / ARKit. 10 apps on the App Store under my own developer account. 7+ years iOS / on-device ML.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Recent work</h2>
+  <div class="timeline">
+    <div class="timeline-item current">
+      <p class="when">2025 — present · Pebble Inc. (Founder)</p>
+      <p class="what">94k-line production iOS retail-vision app — IDVision</p>
+      <p class="desc">Solo-lead. ARKit + LiDAR + YOLOv8 + on-device OCR + multilingual voice (Romanian/English) + multi-device backend sync. Sub-200ms recognition on iPhone 15 Pro. 70+ TestFlight builds. Postgres + AWS + GitHub Actions + Sentry.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="when">2024 — 2025 · Ultralytics</p>
+      <p class="what">YOLOv5 / YOLOv8 mobile deployment team</p>
+      <p class="desc">CoreML / TFLite / ONNX conversion, ANE optimization, mobile reference apps.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="when">2022 — 2024 · Agencia Inc., Tokyo</p>
+      <p class="what">ML Engineer</p>
+      <p class="desc">Production ML pipelines and on-device inference for camera-based products.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="when">2019 — present · Freelance iOS / CV</p>
+      <p class="what">Independent</p>
+      <p class="desc">Shipped 10+ apps under own developer account; maintain CoreML-Models &amp; 134 OSS repos.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Shipped on the App Store · 10 apps under my own developer account</h2>
+  <div class="grid">
+
+    <div class="card">
+      <p class="meta">LiDAR · ARKit</p>
+      <h4>SnapMeasure</h4>
+      <p>Real-world 3D measurement using iPhone Pro / iPad Pro LiDAR. Tap two points → get a distance you can trust.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">CoreML · Vision</p>
+      <h4>Models Zoo</h4>
+      <p>On-device gallery of dozens of CoreML models you can run live on your phone — segmentation, detection, pose, style transfer.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Diffusion · On-device</p>
+      <h4>super2x</h4>
+      <p>On-device image upscaler. Runs ESRGAN-style super-resolution networks fully on the Neural Engine — no server.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Generative · Inpaint</p>
+      <h4>Mask2Face</h4>
+      <p>On-device face inpainting / restoration. Repairs missing or masked regions using a CoreML-converted GAN.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Image-to-Video</p>
+      <h4>AnimateU</h4>
+      <p>One-image animation. Drive a still portrait with motion from another video — on-device.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Diffusion · Image-gen</p>
+      <h4>AIPainter</h4>
+      <p>Text-to-image + inpaint on-device. Stable Diffusion variants ported and optimised to run on iPhone.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Depth · Camera</p>
+      <h4>Blur.</h4>
+      <p>Depth-aware bokeh from a single image. Foreground / background separation through on-device monocular depth.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Memo · OCR</p>
+      <h4>Memosh</h4>
+      <p>OCR-powered quick-capture memo. Photograph anything → searchable text on-device, private.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Utility</p>
+      <h4>Tasmon</h4>
+      <p>Visual task manager with iCloud sync.</p>
+    </div>
+
+    <div class="card">
+      <p class="meta">Photography</p>
+      <h4>timestone</h4>
+      <p>Long-exposure + light-painting style photography on iOS.</p>
+    </div>
+
+  </div>
+  <p style="margin-top:20px;font-size:14px;"><a href="https://apps.apple.com/us/developer/daisuke-majima/id1350309854" target="_blank" rel="noopener">See all on the App Store →</a></p>
+</section>
+
+<section>
+  <h2>Open source · 134 repos · most-used model zoo for iOS Core ML</h2>
+  <div class="grid">
+    <div class="card">
+      <p class="meta">★ 1,745</p>
+      <h4>CoreML-Models</h4>
+      <p>De-facto iOS Core ML model zoo. Ports of YOLO, SAM, LaMa, Tesseract OCR, on-device LLM bindings, Stable Diffusion variants, segmentation, depth, pose, style transfer.</p>
+      <a href="https://github.com/john-rocky/CoreML-Models" target="_blank" rel="noopener">github.com/john-rocky/CoreML-Models →</a>
+    </div>
+
+    <div class="card">
+      <p class="meta">Stack reference</p>
+      <h4>Repos covering</h4>
+      <p>YOLOv5/v8 · SAM · LaMa · Tesseract · MobileNet · DepthAnything · Style-transfer · Pose · OCR · on-device LLM (Llama.cpp / MLX) · Stable-Diffusion · Real-ESRGAN · NeRF · Gaussian-Splat.</p>
+      <a href="https://github.com/john-rocky?tab=repositories" target="_blank" rel="noopener">github.com/john-rocky?tab=repositories →</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Stack</h2>
+  <div class="tags">
+    <span class="tag">Swift</span>
+    <span class="tag">SwiftUI</span>
+    <span class="tag">UIKit</span>
+    <span class="tag">CoreML</span>
+    <span class="tag">ARKit</span>
+    <span class="tag">RealityKit</span>
+    <span class="tag">visionOS</span>
+    <span class="tag">Vision</span>
+    <span class="tag">AVFoundation</span>
+    <span class="tag">Metal</span>
+    <span class="tag">Combine</span>
+    <span class="tag">Swift Concurrency</span>
+    <span class="tag">MLX</span>
+    <span class="tag">llama.cpp</span>
+    <span class="tag">PyTorch</span>
+    <span class="tag">HuggingFace</span>
+    <span class="tag">diffusers</span>
+    <span class="tag">coremltools</span>
+    <span class="tag">ONNX</span>
+    <span class="tag">TFLite</span>
+    <span class="tag">Python</span>
+    <span class="tag">Go</span>
+    <span class="tag">TypeScript</span>
+    <span class="tag">Postgres</span>
+    <span class="tag">AWS</span>
+    <span class="tag">Kotlin</span>
+    <span class="tag">NNAPI</span>
+  </div>
+</section>
+
+<section>
+  <h2>What I'm looking for</h2>
+  <div class="highlight">
+    <h3>Staff / Senior iOS — or Mobile ML</h3>
+    <p>Where on-device ML actually matters: Apple Silicon / ANE optimisation · real-time computer vision · AR / LiDAR · on-device LLM · camera + imaging pipelines · visionOS.</p>
+    <p style="margin-top:14px"><strong>Where:</strong> Remote (JST) or relocate with visa to San Francisco / NYC / Seattle / Tokyo / London.</p>
+    <p style="margin-top:8px"><strong>Form:</strong> Full-time, or contract (2 weeks – 3 months, $150–250/hr).</p>
+    <p style="margin-top:8px"><strong>Start:</strong> Immediately.</p>
+  </div>
+</section>
+
+<div class="cta">
+  <h2 style="color:#fff;">Get in touch</h2>
+  <p>I reply within a day. Open to a quick intro chat anytime.</p>
+  <a class="cta-btn" href="mailto:rockyshikoku@gmail.com?subject=Hiring%20Daisuke%20—%20intro">✉ Email rockyshikoku@gmail.com</a>
+</div>
+
+<footer>
+  © Daisuke Majima · <a href="https://github.com/john-rocky">github.com/john-rocky</a>
+</footer>
+
+</div>
+</body>
+</html>
