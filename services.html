@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iOS On-Device ML Production Sprint — Daisuke Majima</title>
+<meta name="description" content="2-week fixed-price engagement: ship your PyTorch / HF model on iPhone, in production. Apple Neural Engine quantization, latency benchmark, TestFlight build. US$15K–25K.">
+<meta property="og:title" content="iOS On-Device ML Production Sprint — 2-week packaged engagement">
+<meta property="og:description" content="For AI teams who have a working model but no iOS specialist. PyTorch / HF → CoreML / MLX / GGUF, ANE quantization, benchmark report, TestFlight build. US$15K–25K, 2 weeks.">
+<meta property="og:url" content="https://john-rocky.github.io/services.html">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
+  font-size:16px;line-height:1.6;color:#1d1d1f;background:#fbfbfd;-webkit-font-smoothing:antialiased;
+}
+a{color:#0066cc;text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:880px;margin:0 auto;padding:48px 24px}
+@media(min-width:768px){.wrap{padding:80px 24px}}
+.kicker{font-size:14px;text-transform:uppercase;letter-spacing:0.08em;color:#86868b;font-weight:600;margin:0 0 12px}
+h1{font-size:40px;line-height:1.15;margin:0 0 12px;font-weight:700;letter-spacing:-0.02em}
+@media(min-width:768px){h1{font-size:52px}}
+.subtitle{font-size:20px;color:#515154;margin:0 0 32px;font-weight:400;line-height:1.5}
+@media(min-width:768px){.subtitle{font-size:22px}}
+.price{
+  display:inline-flex;align-items:baseline;gap:10px;
+  background:#fff;border:1px solid #d2d2d7;border-radius:12px;
+  padding:14px 20px;margin:0 0 40px;
+}
+.price strong{font-size:24px;font-weight:600}
+.price .unit{color:#86868b;font-size:14px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:0.08em;color:#86868b;font-weight:600;margin:48px 0 16px}
+h3{font-size:22px;margin:0 0 12px;font-weight:600;letter-spacing:-0.01em}
+.lede{font-size:18px;line-height:1.55;color:#1d1d1f;margin:0 0 24px}
+.card{background:#fff;border:1px solid #d2d2d7;border-radius:16px;padding:28px;margin:0 0 16px}
+ul{margin:8px 0 0;padding-left:22px}
+li{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+.cta{
+  background:#1d1d1f;color:#fff;border-radius:16px;padding:32px;text-align:center;
+  margin:48px 0 24px;
+}
+.cta h2{color:#a1a1a6;margin-top:0}
+.cta-btn{
+  display:inline-block;background:#fff;color:#1d1d1f;font-weight:600;
+  padding:14px 28px;border-radius:999px;font-size:16px;margin-top:8px;
+}
+.cta-btn:hover{background:#f5f5f7;text-decoration:none}
+.tag{
+  display:inline-block;background:#f0f0f3;color:#3a3a3c;
+  padding:4px 10px;border-radius:6px;font-size:13px;font-weight:500;margin:3px 4px 3px 0;
+}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px}
+table th,table td{text-align:left;padding:10px 0;border-bottom:1px solid #e5e5ea;vertical-align:top}
+table th{color:#86868b;font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:0.05em;width:130px}
+footer{margin-top:64px;padding-top:32px;border-top:1px solid #e5e5ea;color:#86868b;font-size:14px}
+.muted{color:#86868b;font-size:14px}
+@media (prefers-color-scheme: dark){
+  body{background:#000;color:#f5f5f7}
+  .subtitle{color:#a1a1a6}
+  a{color:#0a84ff}
+  .price,.card{background:#1c1c1e;border-color:#38383a}
+  .cta{background:#1c1c1e}
+  .cta-btn{background:#f5f5f7;color:#1d1d1f}
+  .tag{background:#2c2c2e;color:#a1a1a6}
+  h2{color:#86868b}
+  footer{border-color:#38383a;color:#86868b}
+  table th,table td{border-color:#38383a}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .wrap{max-width:none;padding:24px}
+  .cta{background:#f5f5f7;color:#000}
+  .cta h2{color:#515154}
+  .cta-btn{border:1px solid #000}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="kicker">Packaged engagement · for AI teams shipping to iPhone</p>
+<h1>iOS On-Device ML<br>Production Sprint</h1>
+<p class="subtitle">2-week fixed scope: take your PyTorch / Hugging Face model and ship it on iPhone, in production. Apple Neural Engine, quantized, benchmarked, TestFlight-ready.</p>
+
+<div class="price">
+  <strong>US$15,000 – US$25,000</strong>
+  <span class="unit">/ engagement · 2 weeks · async-first</span>
+</div>
+
+<section>
+  <h2>Who it's for</h2>
+  <p class="lede">You've trained a model in PyTorch or pulled one from Hugging Face. It works on your server. Now you need it running on iPhone / iPad — at the latency, thermal, and memory budget the product needs — and you don't have a senior Apple Silicon specialist on the team.</p>
+  <p class="lede">That's what this is for. I take your model and ship it on Apple Neural Engine in 2 weeks, with a benchmark you can sign off on.</p>
+</section>
+
+<section>
+  <h2>What you get</h2>
+  <div class="card">
+    <h3>Deliverables — fixed</h3>
+    <ul>
+      <li><strong>Model conversion.</strong> PyTorch / HF / ONNX → CoreML, MLX, GGUF, or ExecuTorch — whichever path is fastest and most maintainable for your model family.</li>
+      <li><strong>Apple Neural Engine optimization.</strong> Graph hand-tuning + quantization (FP16 / INT8 / 4-bit), KV-cache packing for autoregressive models, palettization where applicable.</li>
+      <li><strong>iOS SDK or sample-app integration.</strong> Swift / SwiftUI wrapper, AVCapture / VisionKit / ARKit glue where relevant. Reusable in your existing Xcode project.</li>
+      <li><strong>Benchmark report.</strong> Latency (cold + warm), thermal sustain, memory peak, tokens/sec or FPS — measured on iPhone 15 Pro and iPad M4. Written report you can send to your CTO / investor.</li>
+      <li><strong>TestFlight-ready build.</strong> Signing, provisioning, build settings, privacy manifest — ready for App Store review.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Pricing &amp; timeline</h2>
+  <table>
+    <tr><th>Engagement</th><td>2 weeks fixed scope · async-first · JST + a few hours US-Pacific evening / EU morning overlap</td></tr>
+    <tr><th>Price</th><td><strong>US$15,000 – US$25,000</strong> per sprint, scope-dependent (model family complexity, target devices, integration surface)</td></tr>
+    <tr><th>Payment</th><td>50% on kickoff, 50% on benchmark report delivery</td></tr>
+    <tr><th>Discovery</th><td>Optional 1-week feasibility study (US$5,000) — written go/no-go before committing to the full sprint</td></tr>
+    <tr><th>Start</th><td>Slot available within 1–2 weeks of agreement</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Good fit / not a fit</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>👍 You'll get value</h3>
+      <ul>
+        <li>You have a working model in PyTorch / HF and need it on iPhone or iPad</li>
+        <li>You're an AI startup or research lab without an in-house Apple Silicon specialist</li>
+        <li>Latency, thermals, or ANE perf is the thing slowing you down</li>
+        <li>You want benchmark data before committing to a longer engagement</li>
+        <li>You're shipping LLM, VLM, ASR, CV, or diffusion to iPhone in 2026</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>👎 Skip this if</h3>
+      <ul>
+        <li>You only have a research idea, not a trained model</li>
+        <li>You want full-app development end-to-end (this is the inference layer, not the UI / UX)</li>
+        <li>Android-only, React Native-only, or Flutter-only deployment target</li>
+        <li>Strict CET / PT / ET overlap requirement — I'm async-first from JST</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Why me</h2>
+  <div class="card">
+    <h3>Built specifically for this work</h3>
+    <ul>
+      <li><strong>Maintainer of <a href="https://github.com/john-rocky/CoreML-Models" target="_blank" rel="noopener">CoreML-Models</a></strong> (1,749★, 134 OSS repos) — the de-facto iOS Core ML model zoo. Ports of YOLO, SAM, LaMa, Tesseract, on-device LLM, Stable Diffusion.</li>
+      <li><strong>Ex-Ultralytics</strong> (the YOLOv5 / YOLOv8 team) — mobile deployment and Apple Neural Engine optimization.</li>
+      <li><strong>Upstream contributor</strong> to Hugging Face <code>swift-transformers</code>, PyTorch <code>executorch</code>, and Microsoft <code>onnxruntime</code>.</li>
+      <li><strong>10 apps shipped on the App Store</strong> under my own Developer account — SnapMeasure (LiDAR), super2x, AIPainter, Mask2Face, Memosh, AnimateU, Blur., others.</li>
+      <li><strong>Currently solo-lead on a 94k-line SwiftUI iPad app</strong> running LiDAR + on-device YOLO + on-device LLM at 30 FPS, in active production deployment.</li>
+      <li><strong>7+ years iOS / on-device ML engineering.</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Stack</h2>
+  <p>
+    <span class="tag">CoreML</span>
+    <span class="tag">coremltools</span>
+    <span class="tag">MLX</span>
+    <span class="tag">llama.cpp / GGUF</span>
+    <span class="tag">ExecuTorch</span>
+    <span class="tag">ONNX Runtime</span>
+    <span class="tag">TFLite</span>
+    <span class="tag">PyTorch</span>
+    <span class="tag">Hugging Face</span>
+    <span class="tag">diffusers</span>
+    <span class="tag">Apple Neural Engine</span>
+    <span class="tag">Metal</span>
+    <span class="tag">Vision</span>
+    <span class="tag">VisionKit</span>
+    <span class="tag">ARKit</span>
+    <span class="tag">RealityKit</span>
+    <span class="tag">Swift</span>
+    <span class="tag">SwiftUI</span>
+    <span class="tag">Python</span>
+    <span class="tag">C / C++</span>
+  </p>
+</section>
+
+<div class="cta">
+  <h2>Inquire</h2>
+  <p>Email is fastest. Tell me what model and what target device — that's enough to scope.</p>
+  <a class="cta-btn" href="mailto:rockyshikoku@gmail.com?subject=On-Device%20ML%20Production%20Sprint%20%E2%80%94%20inquiry">✉ rockyshikoku@gmail.com</a>
+  <p class="muted" style="margin-top:18px">I reply within a day · async-first · plain text is fine.</p>
+</div>
+
+<footer>
+  Daisuke Majima — Senior iOS / On-Device ML Engineer, Osaka (JST, UTC+9)<br>
+  <a href="https://john-rocky.github.io">john-rocky.github.io</a> · <a href="https://github.com/john-rocky">github.com/john-rocky</a> · <a href="https://www.linkedin.com/in/daisuke-majima-a07b9b215/">LinkedIn</a> · <a href="https://twitter.com/JackdeS11">@JackdeS11</a>
+</footer>
+
+</div>
+</body>
+</html>

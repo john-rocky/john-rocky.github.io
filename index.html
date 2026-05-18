@@ -147,7 +147,7 @@ footer{
   <div class="card">
     <p class="meta">May 2026 · iOS · LiDAR · ARKit</p>
     <h4><a href="/blog/lidar-yolo-ghost-detections.html">Killing ghost detections in real-time LiDAR + YOLO fusion on iPhone →</a></h4>
-    <p>How ARKit's sceneDepth confidence mask + a per-anchor exponential-decay tracker took my retail-vision app from 60% to 88% recognition during motion. With code.</p>
+    <p>How ARKit's sceneDepth confidence mask + a per-anchor exponential-decay tracker took a production iOS app from 60% to 88% recognition during motion. With code.</p>
   </div>
 </section>
 
@@ -155,9 +155,9 @@ footer{
   <h2>Recent work</h2>
   <div class="timeline">
     <div class="timeline-item current">
-      <p class="when">2025 — present · Pebble Inc. (Founder)</p>
-      <p class="what">94k-line production iOS retail-vision app — IDVision</p>
-      <p class="desc">Solo-lead. ARKit + LiDAR + YOLOv8 + on-device OCR + multilingual voice (Romanian/English) + multi-device backend sync. Sub-200ms recognition on iPhone 15 Pro. 70+ TestFlight builds. Postgres + AWS + GitHub Actions + Sentry.</p>
+      <p class="when">2025 — present · Senior iOS / Edge AI Engineer</p>
+      <p class="what">94k-line SwiftUI iPad app running LiDAR + on-device YOLO + on-device LLM at 30 FPS, in active production</p>
+      <p class="desc">Solo-lead engineering. ARKit + LiDAR + YOLOv8 + on-device OCR + multilingual voice (Romanian/English) + multi-device backend sync. Sub-200ms recognition on iPhone 15 Pro. 70+ TestFlight builds. Postgres + AWS + GitHub Actions + Sentry.</p>
     </div>
     <div class="timeline-item">
       <p class="when">2024 — 2025 · Ultralytics</p>
@@ -295,6 +295,54 @@ footer{
     <span class="tag">Kotlin</span>
     <span class="tag">NNAPI</span>
   </div>
+</section>
+
+<section id="services">
+  <h2>Services · packaged on-device ML deployment</h2>
+
+  <div class="highlight">
+    <h3>📦 iOS On-Device LLM / CV Production Sprint</h3>
+    <p><strong>Fixed-scope, 2-week engagement: ship your model on iPhone, in production.</strong></p>
+    <p style="margin-top:14px;color:#515154">For AI teams who have a working PyTorch / Hugging Face model but no iOS specialist to land it on Apple Neural Engine at the latency / thermal / memory budget the product needs.</p>
+    <p style="margin-top:14px"><strong>You bring:</strong> your trained model (LLM, VLM, CV, ASR, or diffusion) and a target use case.</p>
+    <p style="margin-top:8px"><strong>I deliver:</strong></p>
+    <ul style="margin:8px 0 0 0;padding-left:22px;color:#1d1d1f">
+      <li>Model conversion — PyTorch / HF → CoreML / MLX / GGUF / ExecuTorch / ONNX Runtime</li>
+      <li>Apple Neural Engine quantization (FP16 / INT8 / 4-bit) and graph hand-tuning</li>
+      <li>iOS SDK or sample-app integration (Swift / SwiftUI)</li>
+      <li>Latency / thermal sustain / memory benchmark report on iPhone 15 Pro &amp; iPad M4</li>
+      <li>TestFlight-ready build + App Store submission notes</li>
+    </ul>
+    <p style="margin-top:16px"><strong>Timeline:</strong> 2 weeks fixed.</p>
+    <p style="margin-top:8px"><strong>Price:</strong> US$15,000 – US$25,000 per engagement (scope-dependent).</p>
+    <p style="margin-top:8px"><strong>Async-first.</strong> JST + a few hours of US-Pacific evening / EU morning overlap.</p>
+    <p style="margin-top:18px;font-size:14px;color:#86868b">Discovery / feasibility study (single week, US$5,000) available if you'd like a written go / no-go before committing to the full sprint.</p>
+  </div>
+
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+    <div class="card">
+      <p class="meta">Good fit</p>
+      <h4>👍 You'll get value from this</h4>
+      <ul style="margin:8px 0 0 0;padding-left:20px;color:#515154;font-size:15px;line-height:1.5">
+        <li>You have a working model in PyTorch / HF and need it on iPhone or iPad</li>
+        <li>You're an AI startup / lab without an in-house Apple Silicon specialist</li>
+        <li>Latency, thermals, or ANE perf is the thing slowing you down</li>
+        <li>You want benchmark data before committing to a longer engagement</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="meta">Not a fit</p>
+      <h4>👎 Skip if</h4>
+      <ul style="margin:8px 0 0 0;padding-left:20px;color:#515154;font-size:15px;line-height:1.5">
+        <li>You only have a research idea, no model yet</li>
+        <li>You want full-app development end-to-end (this is the inference layer, not UI/UX)</li>
+        <li>Android-only, React-Native-only, or Flutter-only deployment target</li>
+        <li>Strict CET / PT / ET overlap requirement</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top:24px;font-size:15px"><a href="mailto:rockyshikoku@gmail.com?subject=On-Device%20ML%20Production%20Sprint%20—%20inquiry">✉ Inquire — rockyshikoku@gmail.com</a> · plain text is fine, tell me what model and what target device.</p>
 </section>
 
 <section>

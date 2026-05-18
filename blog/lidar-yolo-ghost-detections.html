@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Killing ghost detections in real-time LiDAR + YOLO fusion on iPhone — Daisuke Majima</title>
-<meta name="description" content="Why ARKit's sceneDepth confidence mask is the most underused signal in iOS depth work — and how it took my retail-vision app from 60% to 88% recognition during camera motion.">
+<meta name="description" content="Why ARKit's sceneDepth confidence mask is the most underused signal in iOS depth work — and how it took a production iOS app from 60% to 88% recognition during camera motion.">
 <meta property="og:title" content="Killing ghost detections in real-time LiDAR + YOLO fusion on iPhone">
 <meta property="og:description" content="Three fixes that took recognition rate from 60% to 88% during motion. ARKit sceneDepth confidence-mask, per-anchor exponential decay tracker, per-zone YOLO thresholds.">
 <meta property="og:url" content="https://john-rocky.github.io/blog/lidar-yolo-ghost-detections.html">
@@ -62,8 +62,8 @@ footer{margin-top:64px;padding-top:32px;border-top:1px solid #e5e5ea;color:#8686
 
 <p>When you fuse iPhone LiDAR depth with a YOLO bounding box, the obvious thing to do is intersect them: project the box into the depth map, sample the median depth, and trust that.</p>
 <p>I shipped that. It worked beautifully when the camera was still — and produced <strong>ghost objects everywhere</strong> when the camera was panning.</p>
-<p>Recognition rate on a real warehouse pilot dropped from 85% steady-state to roughly 60% during motion. This is the story of the three fixes that brought it back to 88%.</p>
-<p>This post is iOS / CoreML / ARKit / LiDAR-specific. I maintain <a href="https://github.com/john-rocky/CoreML-Models" target="_blank" rel="noopener">CoreML-Models</a> (1,749★) — the de-facto iOS Core ML model zoo. The retail-vision app described here is the production iOS app I've been solo-leading for 6 months.</p>
+<p>Recognition rate on a production pilot dropped from 85% steady-state to roughly 60% during motion. This is the story of the three fixes that brought it back to 88%.</p>
+<p>This post is iOS / CoreML / ARKit / LiDAR-specific. I maintain <a href="https://github.com/john-rocky/CoreML-Models" target="_blank" rel="noopener">CoreML-Models</a> (1,749★) — the de-facto iOS Core ML model zoo. The production iOS app described here is the 94k-line SwiftUI iPad app I've been solo-leading for 6 months — LiDAR + on-device YOLO + on-device LLM at 30 FPS, in active production.</p>
 
 <hr>
 
@@ -73,7 +73,7 @@ footer{margin-top:64px;padding-top:32px;border-top:1px solid #e5e5ea;color:#8686
 <li><strong>Model</strong>: YOLOv8n converted via <a href="https://github.com/apple/coremltools" target="_blank" rel="noopener">coremltools</a>, running on the Neural Engine. ~6ms per inference.</li>
 <li><strong>Depth</strong>: ARKit <code>sceneDepth</code> at 256×192 resolution (landscape).</li>
 <li><strong>Latency budget</strong>: &lt;200ms end-to-end (capture → classify → fuse → display).</li>
-<li><strong>Workflow</strong>: Warehouse worker pans the iPhone across a shelf; the app detects SKUs and snaps them to physical bins via depth.</li>
+<li><strong>Workflow</strong>: An operator pans the iPhone across a row of physical objects; the app detects each object and snaps it to a depth-defined region in 3D space.</li>
 </ul>
 
 <h2>The bug</h2>
@@ -191,7 +191,7 @@ trackedAnchors.removeAll { $0.confidence &lt; 0.15 }</code></pre>
 
 <div class="cta">
 <h3>Hire me</h3>
-<p>I'm a Senior iOS / On-Device ML Engineer based in Osaka, Japan. I'm currently solo-lead on the 94k-line production retail-vision iOS app this post is from.</p>
+<p>I'm a Senior iOS / On-Device ML Engineer based in Osaka, Japan. I'm currently solo-lead on the 94k-line production iOS app this post is from.</p>
 <p>If you're building products with on-device ML — camera, AR, LiDAR, or on-device LLM — I'm <strong>open to Staff / Senior iOS or Mobile ML roles</strong>. Remote (JST), Tokyo/Osaka hybrid, or relocate with visa.</p>
 <ul>
 <li>👋 Hire-me: <a href="https://john-rocky.github.io">john-rocky.github.io</a></li>
