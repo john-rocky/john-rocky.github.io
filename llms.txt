@@ -1,0 +1,10 @@
+# Daisuke Majima (john-rocky / MLBoy)
+
+> iOS and on-device ML engineer. Ports open models to Apple's Core AI runtime (iOS/macOS 27), maintains a Swift package for running them, and writes down what the runtime does when you actually run it — measured, on real devices.
+
+- [Core AI model zoo](https://john-rocky.github.io/coreai-model-zoo/): community ports of open models to `.aimodel`, each with the recipe that produced it and the gates it passed.
+- [CoreAIKit](https://john-rocky.github.io/coreai-kit/): a Swift package for running those models on Core AI — one line per model across chat, vision-language, speech and more.
+- [Knowledge base](https://john-rocky.github.io/coreai-model-zoo/knowledge/): verified findings about the Core AI runtime itself — thresholds, failure modes, and what was measured on what hardware.
+- [devicemark](https://devicemark.github.io/): a leaderboard for the LLMs that actually run on an iPhone — an intelligence × decode-speed Pareto front under real device limits.
+- [The Art of Core AI](https://john-rocky.github.io/the-art-of-core-ai/): a free book on putting AI on your phone, written entirely from real measurements on Core AI.
+- [Awesome Core AI](https://github.com/john-rocky/awesome-core-ai): curated resources for Core AI — official tooling, converted models, conversion pipelines, sample apps, benchmarks, and learning material.
