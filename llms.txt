@@ -1,10 +1,28 @@
 # Daisuke Majima (john-rocky / MLBoy)
 
-> iOS and on-device ML engineer. Ports open models to Apple's Core AI runtime (iOS/macOS 27), maintains a Swift package for running them, and writes down what the runtime does when you actually run it — measured, on real devices.
+> iOS and on-device ML engineer. Ports open models to Apple's Core AI runtime (iOS/macOS 27) and to Google's LiteRT and LiteRT-LM (Android, iPhone, Mac), maintains the packages that run them, and writes down what each runtime does when you actually run it — measured, on real devices.
 
-- [Core AI model zoo](https://john-rocky.github.io/coreai-model-zoo/): community ports of open models to `.aimodel`, each with the recipe that produced it and the gates it passed.
-- [CoreAIKit](https://john-rocky.github.io/coreai-kit/): a Swift package for running those models on Core AI — one line per model across chat, vision-language, speech and more.
+## Apple: Core AI (iOS/macOS 27)
+
+- [Core AI model zoo](https://john-rocky.github.io/coreai-model-zoo/): community ports of open models to `.aimodel`, each with the recipe that produced it and the gates it passed. Index: https://john-rocky.github.io/coreai-model-zoo/llms.txt
+- [CoreAIKit](https://john-rocky.github.io/coreai-kit/): a Swift package for running those models on Core AI — one line per model across chat, vision-language, speech and more. Index: https://john-rocky.github.io/coreai-kit/llms.txt
 - [Knowledge base](https://john-rocky.github.io/coreai-model-zoo/knowledge/): verified findings about the Core AI runtime itself — thresholds, failure modes, and what was measured on what hardware.
 - [devicemark](https://devicemark.github.io/): a leaderboard for the LLMs that actually run on an iPhone — an intelligence × decode-speed Pareto front under real device limits.
-- [The Art of Core AI](https://john-rocky.github.io/the-art-of-core-ai/): a free book on putting AI on your phone, written entirely from real measurements on Core AI.
+- [The Art of Core AI](https://john-rocky.github.io/the-art-of-core-ai/): a free book on putting AI on your phone, written entirely from real measurements on Core AI. Index: https://john-rocky.github.io/the-art-of-core-ai/llms.txt
 - [Awesome Core AI](https://github.com/john-rocky/awesome-core-ai): curated resources for Core AI — official tooling, converted models, conversion pipelines, sample apps, benchmarks, and learning material.
+- [CoreML-Models](https://github.com/john-rocky/CoreML-Models): the Core ML (`.mlpackage`) zoo for iOS 26 and earlier, with a SwiftUI sample app per model; its AGENTS.md says when to use Core AI instead.
+
+## Google: LiteRT and LiteRT-LM (Android, iPhone, Mac)
+
+- [swift-litert-lm](https://github.com/john-rocky/swift-litert-lm): Gemma 4 on iPhone as a Swift package — one dependency line, five lines to a streaming chat on the Metal GPU, in-app download; also a backend for Apple's Foundation Models API. Index: https://raw.githubusercontent.com/john-rocky/swift-litert-lm/main/llms.txt
+- [hf-to-litertlm](https://github.com/john-rocky/hf-to-litertlm): convert open-weight Hugging Face LLMs and VLMs to `.litertlm` bundles for LiteRT-LM; 62 published conversions, each with measured speeds and a one-command reproduction. Index: https://raw.githubusercontent.com/john-rocky/hf-to-litertlm/main/llms.txt
+- [hfmodels-android](https://github.com/john-rocky/hfmodels-android): a Hugging Face model id to an offline chat in an Android app in a few lines of Kotlin, over LiteRT-LM; model revision and backend pinned. Index: https://raw.githubusercontent.com/john-rocky/hfmodels-android/main/llms.txt
+- [LiteRT-Models](https://github.com/john-rocky/LiteRT-Models): 91 models converted to `.tflite` for LiteRT on Android, each with shapes, preprocessing, the conversion script and a Kotlin sample app; every op on the phone GPU through `CompiledModel`. Index: https://raw.githubusercontent.com/john-rocky/LiteRT-Models/main/llms.txt
+- [On-device recipes](https://john-rocky.github.io/on-device-recipes/): device-verified recipes for adding one on-device AI feature to an existing iOS or Android app; each page answers one developer question. Index: https://john-rocky.github.io/on-device-recipes/llms.txt
+- [edge-compat](https://john-rocky.github.io/edge-compat/): will this `.tflite` run on the GPU, the NPU, or in the browser — op-level delegate compatibility measured per LiteRT version. Index: https://john-rocky.github.io/edge-compat/llms.txt
+- [Awesome LiteRT](https://github.com/john-rocky/awesome-litert): curated resources for the LiteRT stack — runtime, LiteRT-LM, conversion and quantization tooling, models, bindings, sample apps.
+
+## Models on Hugging Face
+
+- [litert-community](https://huggingface.co/litert-community): the converted LiteRT and LiteRT-LM bundles; each LLM repo ships a `litertlm_manifest.json`.
+- [mlboydaisuke](https://huggingface.co/mlboydaisuke): Core AI, Core ML and ExecuTorch conversions.
