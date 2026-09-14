@@ -4,3 +4,4 @@ Allow: /
 Sitemap: https://john-rocky.github.io/sitemap.xml
 Sitemap: https://john-rocky.github.io/coreai-kit/sitemap.xml
 Sitemap: https://john-rocky.github.io/coreai-model-zoo/sitemap.xml
+Sitemap: https://john-rocky.github.io/the-art-of-core-ai/sitemap.xml
