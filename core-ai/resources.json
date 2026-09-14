@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "title": "Core AI community resources",
+  "url": "https://john-rocky.github.io/core-ai/",
+  "llms_url": "https://john-rocky.github.io/core-ai/llms.txt",
+  "reviewed_at": "2026-09-14",
+  "review_scope": "Public resource links and published evidence; no new runtime validation.",
+  "description": "A task router to existing apps, Swift APIs, catalogs, recipes and documentation. Community-maintained; not affiliated with Apple.",
+  "starter": {
+    "package_url": "https://github.com/john-rocky/coreai-kit",
+    "version": "0.4.1",
+    "version_rule": "exact",
+    "catalog_id": "qwen3-0.6b",
+    "catalog_resource_id": "kit-release-catalog",
+    "validation_resource_id": "kit-release-validation",
+    "requirements": [
+      "Mac or physical iPhone with the required OS and SDK; the CoreAI framework is absent from the iOS Simulator SDK.",
+      "Network access for the first-use model download; approximately 352 MB on Mac or 456 MB on iPhone. Allow at least 1 GB free disk.",
+      "Read release validation before selecting a toolchain; these download sizes are not peak-memory measurements."
+    ],
+    "published_validation": {
+      "device": "Mac Studio M4 Max",
+      "os": "macOS 27 beta 26A5416b",
+      "xcode": "Xcode 27 beta 5 27A5237l",
+      "sdk": "macOS SDK 26A5406c",
+      "scope": "See the release's validation record for first-use download, two-turn FoundationModels and Japanese streaming checks.",
+      "limitations": "These results do not establish iPhone execution, newer toolchains or GA compatibility."
+    }
+  },
+  "resources": [
+    {
+      "id": "mac-preview",
+      "type": "app-release",
+      "title": "CoreAI Zoo Mac preview 2.0 build 9",
+      "use_cases": [
+        "Try local chat without compiling an app"
+      ],
+      "url": "https://github.com/john-rocky/coreai-model-zoo/releases/tag/mac-2.0.9",
+      "status": "published-preview",
+      "requirements": [
+        "Apple silicon",
+        "macOS 27",
+        "Model weights download separately"
+      ],
+      "evidence": "Release notes record Qwen3 0.6B chat on Mac M4 Max, macOS 27 beta 26A5416b, built with Xcode 27 beta 5. They do not establish GA compatibility."
+    },
+    {
+      "id": "ios-preview",
+      "type": "testflight-invitation",
+      "title": "CoreAIChat iPhone preview",
+      "use_cases": [
+        "Try the iPhone app through TestFlight"
+      ],
+      "url": "https://testflight.apple.com/join/bK4P7xby",
+      "status": "public-invitation",
+      "requirements": [
+        "TestFlight and a compatible physical device; check Apple's invitation for current build requirements and availability"
+      ],
+      "evidence": "Invitation availability does not establish runtime validation for a particular device, model or OS build."
+    },
+    {
+      "id": "kit-release-guide",
+      "type": "integration-guide",
+      "title": "CoreAIKit 0.4.1 README",
+      "use_cases": [
+        "Add the exact Swift package",
+        "Download and run the starter chat model",
+        "Integrate with FoundationModels"
+      ],
+      "url": "https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/README.md",
+      "media_type": "text/plain",
+      "source_ref": "0.4.1"
+    },
+    {
+      "id": "kit-release-validation",
+      "type": "validation-record",
+      "title": "CoreAIKit 0.4.1 setup and validation",
+      "use_cases": [
+        "Check the measured device, OS, SDK and model revisions",
+        "Reproduce the release checks"
+      ],
+      "url": "https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/docs/GETTING_STARTED.md",
+      "media_type": "text/plain",
+      "source_ref": "0.4.1",
+      "release_url": "https://github.com/john-rocky/coreai-kit/releases/tag/0.4.1"
+    },
+    {
+      "id": "kit-cookbook",
+      "type": "task-cookbook",
+      "title": "CoreAIKit task cookbook",
+      "use_cases": [
+        "Transcribe audio",
+        "Identify speakers",
+        "Redact personal information",
+        "Read document images",
+        "Generate speech",
+        "Search text and images",
+        "Forecast time series"
+      ],
+      "url": "https://john-rocky.github.io/coreai-kit/docs/COOKBOOK.html",
+      "requirements": [
+        "Each task has its own API, model and platform requirements; consult the selected example and card"
+      ]
+    },
+    {
+      "id": "kit-agent-guide",
+      "type": "agent-guide",
+      "title": "CoreAIKit integration contract",
+      "use_cases": [
+        "Choose the system framework or package layer",
+        "Avoid invented model IDs",
+        "Check physical-device constraints"
+      ],
+      "url": "https://john-rocky.github.io/coreai-kit/AGENTS.html"
+    },
+    {
+      "id": "kit-doc-index",
+      "type": "documentation-index",
+      "title": "CoreAIKit documentation and examples",
+      "use_cases": [
+        "Find the example app for a task",
+        "Discover package documentation"
+      ],
+      "url": "https://john-rocky.github.io/coreai-kit/llms.txt",
+      "media_type": "text/plain"
+    },
+    {
+      "id": "kit-release-catalog",
+      "type": "model-catalog",
+      "title": "CoreAIKit 0.4.1 model catalog",
+      "use_cases": [
+        "Resolve a model ID for the selected package release",
+        "Read pinned Hugging Face revisions and platform variants"
+      ],
+      "url": "https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/catalog.json",
+      "media_type": "application/json",
+      "source_ref": "0.4.1",
+      "entry_path": "models",
+      "identity_field": "id"
+    },
+    {
+      "id": "kit-live-catalog",
+      "type": "model-catalog",
+      "title": "CoreAIKit current model catalog",
+      "use_cases": [
+        "Inspect the current package model inventory"
+      ],
+      "url": "https://john-rocky.github.io/coreai-kit/catalog.json",
+      "media_type": "application/json",
+      "entry_path": "models",
+      "identity_field": "id",
+      "requirements": [
+        "This live catalog may differ from the selected package release's built-in snapshot"
+      ]
+    },
+    {
+      "id": "zoo-model-index",
+      "type": "recipe-catalog",
+      "title": "Core AI model zoo model and recipe index",
+      "use_cases": [
+        "Find a ported model family",
+        "Locate its card, source model, recipe and verification references"
+      ],
+      "url": "https://john-rocky.github.io/coreai-model-zoo/models/index.json",
+      "media_type": "application/json",
+      "entry_path": "models",
+      "identity_field": "family",
+      "requirements": [
+        "Family names are not necessarily CoreAIKit IDs; check kit enrollment separately",
+        "Recipe status, metadata verification, numerical parity and device runs are separate evidence"
+      ]
+    },
+    {
+      "id": "model-hub",
+      "type": "model-host",
+      "title": "mlboydaisuke on Hugging Face",
+      "use_cases": [
+        "Download published bundles",
+        "Read model-specific license terms"
+      ],
+      "url": "https://huggingface.co/mlboydaisuke",
+      "requirements": [
+        "Use the selected catalog revision for reproducible package consumption; read each model's license"
+      ]
+    },
+    {
+      "id": "reproduce-model",
+      "type": "agent-skill-source",
+      "title": "Reproduce a zoo model",
+      "use_cases": [
+        "Inspect a published model's prerequisites",
+        "Reproduce a recorded recipe",
+        "Interpret published-bundle checks"
+      ],
+      "url": "https://raw.githubusercontent.com/john-rocky/coreai-model-zoo/main/skills/skills/reproduce-a-zoo-model/SKILL.md",
+      "media_type": "text/plain"
+    },
+    {
+      "id": "port-model",
+      "type": "porting-guide",
+      "title": "Port a new model to Core AI",
+      "use_cases": [
+        "Build a numerical oracle",
+        "Export and compress a model",
+        "Gate a new model port"
+      ],
+      "url": "https://john-rocky.github.io/coreai-model-zoo/PORTING.html"
+    },
+    {
+      "id": "error-index",
+      "type": "troubleshooting-guide",
+      "title": "Observed Core AI errors and fixes",
+      "use_cases": [
+        "Find an observed error by its exact text",
+        "Check a documented cause, fix and evidence"
+      ],
+      "url": "https://john-rocky.github.io/coreai-model-zoo/knowledge/coreai-error-index.html"
+    },
+    {
+      "id": "zoo-doc-index",
+      "type": "documentation-index",
+      "title": "Core AI zoo knowledge and agent index",
+      "use_cases": [
+        "Find a measured runtime behavior",
+        "Discover conversion and verification documentation"
+      ],
+      "url": "https://john-rocky.github.io/coreai-model-zoo/llms.txt",
+      "media_type": "text/plain"
+    },
+    {
+      "id": "book",
+      "type": "book",
+      "title": "The Art of Core AI",
+      "use_cases": [
+        "Learn Core AI through chapters and labs"
+      ],
+      "url": "https://john-rocky.github.io/the-art-of-core-ai/"
+    },
+    {
+      "id": "ecosystem",
+      "type": "ecosystem-directory",
+      "title": "Awesome Core AI",
+      "use_cases": [
+        "Find official tools, community models, runtimes and examples"
+      ],
+      "url": "https://github.com/john-rocky/awesome-core-ai"
+    }
+  ],
+  "routes": [
+    {
+      "task": "Try the Mac app without compiling",
+      "resource_ids": [
+        "mac-preview"
+      ]
+    },
+    {
+      "task": "Try the iPhone preview",
+      "resource_ids": [
+        "ios-preview"
+      ]
+    },
+    {
+      "task": "Add local chat to a Swift app",
+      "resource_ids": [
+        "kit-release-guide",
+        "kit-release-validation",
+        "kit-agent-guide",
+        "kit-release-catalog"
+      ]
+    },
+    {
+      "task": "Add speech, PII redaction, OCR, search or another task",
+      "resource_ids": [
+        "kit-cookbook",
+        "kit-doc-index",
+        "kit-agent-guide",
+        "kit-release-catalog"
+      ]
+    },
+    {
+      "task": "Find a model and its download requirements",
+      "resource_ids": [
+        "kit-release-catalog",
+        "kit-live-catalog",
+        "zoo-model-index",
+        "model-hub"
+      ]
+    },
+    {
+      "task": "Reproduce a published bundle",
+      "resource_ids": [
+        "zoo-model-index",
+        "reproduce-model"
+      ]
+    },
+    {
+      "task": "Port a new model",
+      "resource_ids": [
+        "port-model",
+        "zoo-doc-index"
+      ]
+    },
+    {
+      "task": "Diagnose a Core AI error",
+      "resource_ids": [
+        "error-index",
+        "zoo-doc-index"
+      ]
+    },
+    {
+      "task": "Learn the runtime and find other tools",
+      "resource_ids": [
+        "book",
+        "ecosystem"
+      ]
+    }
+  ]
+}

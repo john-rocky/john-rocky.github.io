@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Try local AI on Mac and iPhone — Core AI apps, models and Swift examples</title>
+  <meta name="description" content="Try the CoreAI Zoo Mac app, add local AI to Swift with CoreAIKit, or choose a model for your device. Real demos, versioned examples, and verification records.">
+  <link rel="canonical" href="https://john-rocky.github.io/core-ai/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Core AI resources by Daisuke Majima">
+  <meta property="og:title" content="Try local AI, then build it into your app">
+  <meta property="og:description" content="A Mac app to try, Swift examples to build from, and models with device-specific evidence. Start with the task you want to do.">
+  <meta property="og:url" content="https://john-rocky.github.io/core-ai/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/john-rocky/coreai-assets/main/kit/coreaikit-0.4.1-mac.jpg">
+  <meta property="og:image:alt" content="CoreAIKit 0.4.1 chat and speech demonstration on a Mac, recorded September 9, 2026.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="CoreAIKit 0.4.1 chat and speech demonstration on a Mac, recorded September 9, 2026.">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="Core AI resources for agents">
+  <link rel="alternate" type="application/json" href="resources.json" title="Core AI resource manifest">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2317413c'/%3E%3Cpath d='M42 21a16 16 0 1 0 0 22' fill='none' stroke='%23f7f5ee' stroke-width='7'/%3E%3C/svg%3E">
+  <style>
+    :root{color-scheme:light;--ink:#1d302d;--muted:#52635e;--paper:#f8f7f2;--line:#d9dfd7;--green:#17413c;--accent:#cce8bf;--white:#fff;--rust:#984827}
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    html{scroll-behavior:smooth;scroll-padding-top:24px}
+    body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:var(--green);text-underline-offset:4px;text-decoration-thickness:1px}
+    a:hover{text-decoration-thickness:2px}
+    a:focus-visible,button:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--rust);outline-offset:5px}
+    .skip{position:absolute;left:20px;top:-100px;z-index:5;background:var(--white);padding:10px 18px}
+    .skip:focus{top:12px}
+    .wrap{width:min(1120px,calc(100% - 64px));margin-inline:auto}
+    header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:750;text-decoration:none;letter-spacing:-.025em;white-space:nowrap}
+    .mark{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--green);color:var(--paper);font-size:22px}
+    .brand span:last-child{color:var(--muted);font-size:13px;font-weight:500;letter-spacing:0;margin-left:4px}
+    nav{display:flex;flex-wrap:wrap;gap:12px 24px;font-size:14px}
+    nav a{text-decoration:none}
+    .hero{padding:78px 0 52px;max-width:900px}
+    .eyebrow{margin:0 0 18px;color:var(--rust);font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.15em}
+    h1{font-size:clamp(40px,5.8vw,68px);line-height:1.06;letter-spacing:-.055em;font-weight:730;margin:0 0 24px;max-width:850px;text-wrap:balance}
+    .lead{font-size:21px;line-height:1.6;max-width:760px;color:var(--muted);margin:0 0 28px}
+    .actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+    .button{display:inline-flex;justify-content:center;align-items:center;gap:10px;border:1px solid var(--green);border-radius:8px;padding:12px 19px;background:var(--green);color:white;font:inherit;font-weight:650;font-size:15px;text-decoration:none;cursor:pointer}
+    .button:hover{background:#23534c;text-decoration:none}
+    .button.secondary{color:var(--green);background:transparent}
+    .button.secondary:hover{background:#eaf0e5}
+    .small{font-size:13px;line-height:1.65;color:var(--muted)}
+    .hero .small{margin:18px 0 0}
+    .example{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,380px);gap:64px;align-items:center;background:#eaf0e5;border:1px solid #d8e2d1;border-radius:20px;padding:40px 56px;overflow:hidden}
+    h2{font-size:clamp(28px,3.3vw,38px);line-height:1.2;letter-spacing:-.035em;margin:0 0 18px;text-wrap:balance}
+    .example h2{max-width:480px}
+    .example p{max-width:490px}
+    .example .eyebrow{margin-bottom:16px}
+    figure{margin:0}
+    .phone{max-width:280px;margin:auto;background:white;padding:6px;border:1px solid #d6dcd4;border-radius:19px;box-shadow:0 16px 32px #203d2a14}
+    .phone img{display:block;width:100%;height:auto;border-radius:13px}
+    figcaption{margin-top:16px;font-size:12px;line-height:1.6;color:var(--muted)}
+    .section{padding-top:76px}
+    .section-intro{margin:0 0 28px;max-width:780px;color:var(--muted)}
+    .routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+    .route{position:relative;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:28px 30px;min-width:0}
+    .route-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+    .number{font-size:12px;font-weight:750;letter-spacing:.05em;color:var(--muted);border:1px solid var(--line);border-radius:50%;width:30px;height:30px;display:grid;place-items:center}
+    .tag{font-size:12px;background:#edf3e8;padding:4px 10px;border-radius:4px;color:var(--green)}
+    h3{font-size:25px;line-height:1.25;letter-spacing:-.025em;margin:0 0 12px}
+    .route p{margin:0 0 16px}
+    .route ol{padding-left:22px;margin:0 0 24px;font-size:15px}
+    .route li{padding-left:3px;margin-bottom:7px}
+    .route .small{margin-top:16px;margin-bottom:0}
+    .route-links{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:14px;margin-top:17px}
+    .evidence{background:#efeee7;border-left:3px solid #8d9d85;padding:18px 22px;margin-top:24px;font-size:14px;color:#42524b}
+    .evidence p{margin:0}
+    .demo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:36px}
+    video{display:block;width:100%;aspect-ratio:16/9;background:#111;border-radius:12px}
+    details{font-size:14px;color:var(--muted);margin-top:15px}
+    summary{cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+    .agent{background:var(--green);color:var(--paper);border-radius:18px;padding:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:38px;align-items:start}
+    .agent h2{font-size:30px}
+    .agent p{margin:0 0 18px;color:#d7e6dc}
+    .agent a{color:#d8f0c9}
+    .agent .eyebrow{color:#c6e7b6}
+    label{display:block;font-size:13px;margin-bottom:8px;font-weight:600}
+    textarea{width:100%;min-height:170px;padding:15px;resize:vertical;border:1px solid #6b8980;border-radius:8px;background:#103630;color:#f3f6ed;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+    .agent .button{background:var(--accent);border-color:var(--accent);color:#173c2e;margin-top:12px}
+    .agent .button:hover{background:#e0f3d7}
+    .copy-status{font-size:13px;min-height:24px;margin-top:6px!important;margin-bottom:0!important}
+    .reading{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;border-top:1px solid var(--line);padding-top:24px}
+    .reading p{font-size:15px;color:var(--muted);margin:8px 0 0}
+    footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 36px;font-size:13px;color:var(--muted)}
+    footer p{margin:0 0 8px}
+    footer a{white-space:nowrap}
+    @media(max-width:1000px){.routes{grid-template-columns:1fr}.route ol{max-width:620px}}
+    @media(max-width:760px){.wrap{width:calc(100% - 36px)}header{align-items:flex-start;flex-direction:column;gap:18px;padding:22px 0}nav{gap:12px 20px}.hero{padding:48px 0 36px}.lead{font-size:18px}.example{grid-template-columns:1fr;gap:28px;padding:28px}.example figure{max-width:300px;margin:auto}.demo,.agent{grid-template-columns:1fr}.section{padding-top:52px}.route{padding:24px}.agent{padding:26px;gap:24px}.reading{grid-template-columns:1fr}h1{letter-spacing:-.045em}.brand span:last-child{display:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./" aria-label="Core AI resources home"><span class="mark" aria-hidden="true">C</span> Core AI <span>Community apps &amp; tools</span></a>
+      <nav aria-label="Main navigation"><a href="#try">Try the app</a><a href="#build">Build a feature</a><a href="#models">Choose a model</a><a href="#agents">For agents</a></nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">On-device AI · Mac &amp; iPhone</p>
+        <h1 id="page-title">Try local AI, then build it into your app.</h1>
+        <p class="lead">Hide names before sharing text, transcribe a recording, or add chat. Explore models that run on the user's device, then use the same tools in your Swift app.</p>
+        <div class="actions"><a class="button" href="#try">Try the Mac app <span aria-hidden="true">↗</span></a><a class="button secondary" href="#build">Start with a Swift example <span aria-hidden="true">→</span></a></div>
+        <p class="small">Community projects for Apple's Core AI runtime. Check each model's device requirements and verification record below.</p>
+      </section>
+
+      <section class="example" aria-labelledby="example-title">
+        <div>
+          <p class="eyebrow">A feature you can see</p>
+          <h2 id="example-title">A copy to share, with personal details removed.</h2>
+          <p>This example finds names and contact details in text, then replaces them with labels such as <code>[PERSON]</code> and <code>[EMAIL]</code>. The model runs on the device.</p>
+          <p>Local inference avoids a per-request inference API bill. Account for the model download, processing time, and memory use, and let people review the redactions before sharing.</p>
+          <a href="https://github.com/john-rocky/coreai-kit/tree/0.4.1/Examples/InfoExtract">Explore the redaction example <span aria-hidden="true">→</span></a>
+        </div>
+        <figure>
+          <a href="https://raw.githubusercontent.com/john-rocky/coreai-assets/main/kit/pii-gliner2.jpg" aria-label="Open the full-size redaction demonstration"><div class="phone"><img src="https://raw.githubusercontent.com/john-rocky/coreai-assets/main/kit/pii-gliner2.jpg" width="560" height="1120" alt="PII Redactor shows sample text above a sharing copy with names, email, phone number, and other personal details replaced by labels. Nine entities are detected." fetchpriority="high"></div></a>
+          <figcaption>Real-device GLiNER2 demonstration, July 2026. Nine detections in this English sample. The exact capture day and Kit version were not recorded; this image is separate from the September 0.4.1 checks.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" aria-labelledby="start-title">
+        <p class="eyebrow">Choose your next step</p>
+        <h2 id="start-title">From a first reply to your own feature.</h2>
+        <p class="section-intro">Use the app to try a model, the Swift package to integrate it, or the catalog to compare options for your device.</p>
+        <div class="routes">
+          <article class="route" id="try">
+            <div class="route-top"><span class="number" aria-hidden="true">01</span><span class="tag">No coding needed</span></div>
+            <h3>Try chat on your Mac</h3>
+            <p>CoreAI Zoo is a downloadable Mac preview. Start with the small Qwen3 0.6B chat model.</p>
+            <ol><li>Open the DMG and drag CoreAIZoo into Applications.</li><li>Open Chat, choose Qwen3 0.6B, then Download &amp; Load.</li><li>Wait for Ready and send a message.</li></ol>
+            <a class="button" href="https://github.com/john-rocky/coreai-model-zoo/releases/download/mac-2.0.9/CoreAIZoo-2.0-9.dmg">Download Mac preview <span aria-hidden="true">↓</span></a>
+            <p class="small">Apple silicon · macOS 27 · signed and notarized.<br>The first model download is about 352 MB and needs internet access.</p>
+            <div class="route-links"><a href="https://github.com/john-rocky/coreai-model-zoo/releases/tag/mac-2.0.9">Release &amp; verification</a><a href="https://testflight.apple.com/join/bK4P7xby">iPhone TestFlight beta</a></div>
+            <p class="small">TestFlight shows available builds and device requirements. The Mac verification does not establish iPhone compatibility.</p>
+          </article>
+          <article class="route" id="build">
+            <div class="route-top"><span class="number" aria-hidden="true">02</span><span class="tag">For Swift developers</span></div>
+            <h3>Add a local AI feature</h3>
+            <p>CoreAIKit handles model downloads, caching, and inference from Swift. Start with Qwen3 0.6B in the published <strong>0.4.1</strong> ChatDemo.</p>
+            <p>You'll need Xcode 27 and a supported Mac or physical iPhone. Check the setup and verification records for your environment.</p>
+            <a class="button" href="https://github.com/john-rocky/coreai-kit/tree/0.4.1/Examples/ChatDemo">Open ChatDemo 0.4.1 <span aria-hidden="true">↗</span></a>
+            <div class="route-links"><a href="https://github.com/john-rocky/coreai-kit/releases/tag/0.4.1">Get CoreAIKit 0.4.1</a><a href="https://github.com/john-rocky/coreai-kit/blob/0.4.1/docs/GETTING_STARTED.md">Requirements &amp; setup</a><a href="https://github.com/john-rocky/coreai-kit/blob/main/docs/COOKBOOK.md">Feature examples</a></div>
+            <p class="small">If Apple's built-in model meets your needs, start with <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models</a>. CoreAIKit adds a route to models you choose.</p>
+          </article>
+          <article class="route" id="models">
+            <div class="route-top"><span class="number" aria-hidden="true">03</span><span class="tag">Find a model for your task</span></div>
+            <h3>Compare before downloading</h3>
+            <p>Find chat, vision, audio, and other models with conversion recipes and verification notes. Check the device support, download size, model terms, and measurements for your chosen variant.</p>
+            <a href="https://github.com/john-rocky/coreai-model-zoo#readme">Browse the model zoo <span aria-hidden="true">→</span></a>
+            <div class="route-links"><a href="https://huggingface.co/mlboydaisuke">Downloadable model bundles</a><a href="https://devicemark.github.io/">Compare iPhone LLM measurements</a></div>
+          </article>
+        </div>
+        <aside class="evidence" aria-label="Verification scope"><p><strong>What has been checked:</strong> the linked Mac preview's Qwen3 0.6B download and chat path was verified September 10, 2026, on M4 Max / macOS 27 beta <code>26A5416b</code>. CoreAIKit 0.4.1 was separately checked September 9 with Xcode 27 beta 5 <code>27A5237l</code>. These are historical beta results; GA and other device results belong in the linked release and model records.</p></aside>
+      </section>
+
+      <section class="section demo" aria-labelledby="demo-title">
+        <figure>
+          <video controls playsinline preload="none" poster="https://raw.githubusercontent.com/john-rocky/coreai-assets/main/kit/coreaikit-0.4.1-mac.jpg" aria-label="CoreAIKit 0.4.1 Mac chat and speech recording; description follows">
+            <source src="https://raw.githubusercontent.com/john-rocky/coreai-assets/main/kit/coreaikit-0.4.1-mac.mp4" type="video/mp4">
+            <a href="https://github.com/john-rocky/coreai-assets/blob/main/kit/coreaikit-0.4.1-mac.mp4">Watch the chat and speech recording</a>.
+          </video>
+          <figcaption>33 seconds · CoreAIKit 0.4.1 · Mac Studio M4 Max · September 9, 2026. Cached models at normal speed; builds and first downloads are omitted.</figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow">A recorded Mac run</p>
+          <h2 id="demo-title">A local answer, then speech.</h2>
+          <p>The public ChatDemo runs Qwen3 0.6B, then Speak generates audio with VoxCPM 0.5B. The recording details include exact versions and commands so you can see what was run.</p>
+          <a href="https://github.com/john-rocky/coreai-assets/blob/main/kit/coreaikit-0.4.1-mac.md">Read the reproduction steps <span aria-hidden="true">→</span></a>
+          <details><summary>Video description and environment</summary><p>A terminal runs the chat example with a question about Japan's capital and displays the model's answer. The speech example generates and plays a WAV from “Hello from Core AI.” The run uses macOS 27 beta <code>26A5416b</code>, Xcode 27 beta 5 <code>27A5237l</code>, and SDK <code>26A5406c</code>. It records the Mac run, with separate first-download and conversation checks linked in the release.</p></details>
+        </div>
+      </section>
+
+      <section class="section" id="agents" aria-labelledby="agents-title">
+        <div class="agent">
+          <div>
+            <p class="eyebrow">Working with a coding agent?</p>
+            <h2 id="agents-title">Give it the right starting points.</h2>
+            <p>Use the short resource index for documentation links, or the JSON manifest for structured discovery. Both point to the published projects and their verification records.</p>
+            <div class="route-links"><a href="llms.txt">Read llms.txt</a><a href="resources.json">Open resources.json</a></div>
+          </div>
+          <div>
+            <label for="agent-links">Copy these resource links into your agent</label>
+            <textarea id="agent-links" readonly spellcheck="false">Core AI resources:
+https://john-rocky.github.io/core-ai/llms.txt
+https://john-rocky.github.io/core-ai/resources.json
+
+Check the linked release and model records for my target device, OS, and SDK before choosing an example.</textarea>
+            <button class="button" type="button" id="copy-links" hidden>Copy agent links</button>
+            <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="reading-title">
+        <h2 id="reading-title">Learn what shipping involves</h2>
+        <div class="reading">
+          <div><a href="https://john-rocky.github.io/the-art-of-core-ai/">The Art of Core AI — free book</a><p>Memory, quantization, conversion, and deployment, with hands-on labs. <a href="https://zenn.dev/mlboydaisuke/books/coreai-textbook" lang="ja">日本語版</a> · <a href="https://github.com/john-rocky/coreai-model-zoo/tree/main/knowledge">Working notes</a></p></div>
+          <div><a href="https://rockyshikoku.medium.com/adding-ai-doesnt-have-to-mean-charging-a-subscription-aae71dd5d443">Adding AI doesn't have to mean charging a subscription</a><p>A practical look at local features, model downloads, and the costs a one-time app still needs to cover.</p></div>
+          <div lang="ja"><a href="https://qiita.com/john-rocky/items/748fee8781c0ce9deebd">AI機能のために、アプリを月額制にしなくてもいい</a><p>買い切りアプリにAI機能を加えるとき、API代と端末の負担をどう考えるか。個人情報を伏せる実例から紹介します。</p></div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Maintained by <a href="https://john-rocky.github.io/">Daisuke Majima (MLBoy)</a> · <a href="https://github.com/john-rocky">GitHub</a> · <a href="https://huggingface.co/mlboydaisuke">Hugging Face</a></p>
+      <p>Independent community projects, not affiliated with Apple. Source code and model weights have their own licenses.</p>
+      <p>Need help with a conversion? <a href="https://github.com/john-rocky/coreai-model-zoo/issues/new?template=conversion-clinic.yml">Share the model and error in a GitHub issue</a>.</p>
+    </footer>
+  </div>
+  <script>
+    const copyButton = document.getElementById('copy-links');
+    const agentLinks = document.getElementById('agent-links');
+    const copyStatus = document.getElementById('copy-status');
+    copyButton.hidden = false;
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(agentLinks.value);
+        copyStatus.textContent = 'Copied. Paste these links into your agent.';
+      } catch {
+        agentLinks.focus();
+        agentLinks.select();
+        copyStatus.textContent = 'Links selected. Use your device’s copy command.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+# Core AI: choose an app, a Swift API, or a model recipe
+
+> Community resources for running open models on Apple's Core AI runtime on iOS/macOS 27.
+> Start from the task below. Existing repositories and model cards hold the implementation,
+> model revisions, licenses and validation evidence. This directory is a router, not a model catalog.
+
+- [Human starting page](https://john-rocky.github.io/core-ai/)
+- [Machine-readable resource manifest](https://john-rocky.github.io/core-ai/resources.json): resource IDs, types, use cases, URLs, requirements and evidence. Task routes reference these IDs.
+
+## Try an app without building
+
+- [CoreAI Zoo Mac preview](https://github.com/john-rocky/coreai-model-zoo/releases/tag/mac-2.0.9): signed and notarized app, installation steps and recorded environment. Requires Apple silicon and macOS 27. Model weights download separately. The published test covers Qwen3 0.6B chat on the stated beta environment.
+- [CoreAIChat on TestFlight](https://testflight.apple.com/join/bK4P7xby): iPhone preview invitation; Apple controls availability and the current build's requirements. An invitation link is not evidence that a particular device or OS build passed validation.
+
+## Add local AI to a Swift app
+
+- [CoreAIKit 0.4.1 README, plain Markdown](https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/README.md): exact dependency, first-use download and chat starter.
+- [0.4.1 validation and setup, plain Markdown](https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/docs/GETTING_STARTED.md): tested hardware, OS/SDK builds, model pins, follow-up turns and download handling.
+- [Task cookbook](https://john-rocky.github.io/coreai-kit/docs/COOKBOOK.html): choose transcription, speaker diarization, PII redaction, OCR, image tasks, speech synthesis, semantic search or forecasting; each task links its API and example.
+- [Coding-agent integration guide](https://john-rocky.github.io/coreai-kit/AGENTS.html): choose the appropriate Apple framework or kit layer; check capabilities and real-device constraints before writing code.
+- [CoreAIKit full documentation index](https://john-rocky.github.io/coreai-kit/llms.txt): the existing example and documentation directory.
+
+The documented starter is `exact: "0.4.1"` and catalog ID `qwen3-0.6b`.
+Its model download is approximately 352 MB on Mac / 456 MB on iPhone; allow at least
+1 GB free disk. These are download sizes, not memory measurements. Public release
+evidence uses Mac Studio M4 Max, macOS 27 beta `26A5416b`, Xcode 27 beta 5 `27A5237l`
+and macOS SDK `26A5406c`. It does not establish iPhone or GA compatibility.
+CoreAI examples require a Mac or physical device; the CoreAI framework is absent from
+the iOS Simulator SDK. Read the release evidence before selecting a toolchain.
+
+## Find a model without guessing an ID
+
+- [CoreAIKit 0.4.1 catalog JSON](https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/catalog.json): the selected release's IDs, task kinds, immutable Hugging Face revisions and per-platform variants.
+- [CoreAIKit current catalog JSON](https://john-rocky.github.io/coreai-kit/catalog.json): current package catalog; it can differ from the release snapshot.
+- [Zoo model and recipe index JSON](https://john-rocky.github.io/coreai-model-zoo/models/index.json): model families, cards, source models, recipes and published verification references. Family names are not necessarily CoreAIKit IDs; check kit enrollment separately.
+- [Hugging Face models](https://huggingface.co/mlboydaisuke): downloadable bundles and model-specific license terms. Follow the catalog's pinned revision when consuming a package release.
+
+## Reproduce, port, or debug a model
+
+- [Reproduce a zoo model, plain Markdown](https://raw.githubusercontent.com/john-rocky/coreai-model-zoo/main/skills/skills/reproduce-a-zoo-model/SKILL.md): inspect recorded prerequisites, reproduce the recipe and interpret metadata verification results.
+- [Port a model](https://john-rocky.github.io/coreai-model-zoo/PORTING.html): oracle, export, compression, numerical gates and device checks.
+- [Observed error index](https://john-rocky.github.io/coreai-model-zoo/knowledge/coreai-error-index.html): search the actual error text for its observed cause, fix and evidence.
+- [Zoo knowledge and agent index](https://john-rocky.github.io/coreai-model-zoo/llms.txt): runtime notes and measured behavior, with per-topic source links.
+
+Recipe `status` describes the recorded reproduction configuration. Metadata checks,
+numerical parity and hardware runs are separate kinds of evidence; read the card and
+transcript before claiming that a model works on a particular device or OS release.
+
+## Learn and compare
+
+- [The Art of Core AI](https://john-rocky.github.io/the-art-of-core-ai/): free book and labs.
+- [Awesome Core AI](https://github.com/john-rocky/awesome-core-ai): official tooling, community models, runtimes, sample apps and engineering resources.
+
+Resource review date: 2026-09-14. Compatibility claims above retain their original
+test environment; this date is a link review, not a new runtime validation.

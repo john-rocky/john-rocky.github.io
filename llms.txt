@@ -4,6 +4,7 @@
 
 ## Apple: Core AI (iOS/macOS 27)
 
+- [Start with Core AI](https://john-rocky.github.io/core-ai/): choose a downloadable app, a Swift integration, or a model conversion recipe. Agent task router: https://john-rocky.github.io/core-ai/llms.txt · machine-readable resources: https://john-rocky.github.io/core-ai/resources.json
 - [Core AI model zoo](https://john-rocky.github.io/coreai-model-zoo/): community ports of open models to `.aimodel`, each with the recipe that produced it and the gates it passed. Index: https://john-rocky.github.io/coreai-model-zoo/llms.txt
 - [CoreAIKit](https://john-rocky.github.io/coreai-kit/): a Swift package for running those models on Core AI — one line per model across chat, vision-language, speech and more. Index: https://john-rocky.github.io/coreai-kit/llms.txt
 - [Knowledge base](https://john-rocky.github.io/coreai-model-zoo/knowledge/): verified findings about the Core AI runtime itself — thresholds, failure modes, and what was measured on what hardware.
