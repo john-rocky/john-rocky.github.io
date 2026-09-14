@@ -6,6 +6,9 @@
   <title>Try local AI on Mac and iPhone — Core AI apps, models and Swift examples</title>
   <meta name="description" content="Try the CoreAI Zoo Mac app, add local AI to Swift with CoreAIKit, or choose a model for your device. Real demos, versioned examples, and verification records.">
   <link rel="canonical" href="https://john-rocky.github.io/core-ai/">
+  <link rel="alternate" hreflang="en" href="https://john-rocky.github.io/core-ai/">
+  <link rel="alternate" hreflang="ja" href="https://john-rocky.github.io/core-ai/ja/">
+  <link rel="alternate" hreflang="x-default" href="https://john-rocky.github.io/core-ai/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Core AI resources by Daisuke Majima">
   <meta property="og:title" content="Try local AI, then build it into your app">
@@ -80,6 +83,9 @@
     .agent p{margin:0 0 18px;color:#d7e6dc}
     .agent a{color:#d8f0c9}
     .agent .eyebrow{color:#c6e7b6}
+    .agent .route-links{margin-bottom:18px}
+    .install-command{margin:18px 0;padding:15px;border:1px solid #6b8980;border-radius:8px;background:#103630;color:#f3f6ed;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+    .install-command code{font:inherit}
     label{display:block;font-size:13px;margin-bottom:8px;font-weight:600}
     textarea{width:100%;min-height:170px;padding:15px;resize:vertical;border:1px solid #6b8980;border-radius:8px;background:#103630;color:#f3f6ed;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
     .agent .button{background:var(--accent);border-color:var(--accent);color:#173c2e;margin-top:12px}
@@ -100,7 +106,7 @@
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="Core AI resources home"><span class="mark" aria-hidden="true">C</span> Core AI <span>Community apps &amp; tools</span></a>
-      <nav aria-label="Main navigation"><a href="#try">Try the app</a><a href="#build">Build a feature</a><a href="#models">Choose a model</a><a href="#agents">For agents</a></nav>
+      <nav aria-label="Main navigation"><a href="#try">Try the app</a><a href="#build">Build a feature</a><a href="#models">Choose a model</a><a href="#agents">For agents</a><a href="ja/" lang="ja">日本語</a></nav>
     </header>
     <main id="main">
       <section class="hero" aria-labelledby="page-title">
@@ -146,7 +152,7 @@
             <p>CoreAIKit handles model downloads, caching, and inference from Swift. Start with Qwen3 0.6B in the published <strong>0.4.1</strong> ChatDemo.</p>
             <p>You'll need Xcode 27 and a supported Mac or physical iPhone. Check the setup and verification records for your environment.</p>
             <a class="button" href="https://github.com/john-rocky/coreai-kit/tree/0.4.1/Examples/ChatDemo">Open ChatDemo 0.4.1 <span aria-hidden="true">↗</span></a>
-            <div class="route-links"><a href="https://github.com/john-rocky/coreai-kit/releases/tag/0.4.1">Get CoreAIKit 0.4.1</a><a href="https://github.com/john-rocky/coreai-kit/blob/0.4.1/docs/GETTING_STARTED.md">Requirements &amp; setup</a><a href="https://github.com/john-rocky/coreai-kit/blob/main/docs/COOKBOOK.md">Feature examples</a></div>
+            <div class="route-links"><a href="https://github.com/john-rocky/coreai-kit/releases/tag/0.4.1">Get CoreAIKit 0.4.1</a><a href="https://github.com/john-rocky/coreai-kit/blob/0.4.1/docs/GETTING_STARTED.md">Requirements &amp; setup</a><a href="https://github.com/john-rocky/coreai-kit/blob/main/docs/COOKBOOK.md">Feature examples</a><a href="#agents">Add the integration skill</a></div>
             <p class="small">If Apple's built-in model meets your needs, start with <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models</a>. CoreAIKit adds a route to models you choose.</p>
           </article>
           <article class="route" id="models">
@@ -181,15 +187,20 @@
         <div class="agent">
           <div>
             <p class="eyebrow">Working with a coding agent?</p>
-            <h2 id="agents-title">Give it the right starting points.</h2>
-            <p>Use the short resource index for documentation links, or the JSON manifest for structured discovery. Both point to the published projects and their verification records.</p>
-            <div class="route-links"><a href="llms.txt">Read llms.txt</a><a href="resources.json">Open resources.json</a></div>
+            <h2 id="agents-title">Have your agent add the feature.</h2>
+            <p>Add local chat, vision, or speech to an existing Swift app. The <code>integrate-coreai</code> skill checks the package version and device variant, then guides download handling and app integration.</p>
+            <p class="small">Run from your app project to install for Codex:</p>
+            <pre class="install-command"><code>npx skills@1.5.26 add john-rocky/coreai-kit-skills --skill integrate-coreai --agent codex --copy --yes</code></pre>
+            <div class="route-links"><a href="https://github.com/john-rocky/coreai-kit-skills">Install guide &amp; other agents</a><a href="https://raw.githubusercontent.com/john-rocky/coreai-kit-skills/main/skills/integrate-coreai/SKILL.md">Read SKILL.md</a></div>
           </div>
           <div>
+            <p>For model recipes and documentation, use the resource index or JSON manifest. Both link to the projects and their published verification records.</p>
+            <div class="route-links"><a href="llms.txt">Read llms.txt</a><a href="resources.json">Open resources.json</a></div>
             <label for="agent-links">Copy these resource links into your agent</label>
             <textarea id="agent-links" readonly spellcheck="false">Core AI resources:
 https://john-rocky.github.io/core-ai/llms.txt
 https://john-rocky.github.io/core-ai/resources.json
+https://raw.githubusercontent.com/john-rocky/coreai-kit-skills/main/skills/integrate-coreai/SKILL.md
 
 Check the linked release and model records for my target device, OS, and SDK before choosing an example.</textarea>
             <button class="button" type="button" id="copy-links" hidden>Copy agent links</button>

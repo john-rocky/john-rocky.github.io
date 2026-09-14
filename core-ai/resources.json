@@ -2,6 +2,10 @@
   "schema_version": 1,
   "title": "Core AI community resources",
   "url": "https://john-rocky.github.io/core-ai/",
+  "localized_urls": {
+    "en": "https://john-rocky.github.io/core-ai/",
+    "ja": "https://john-rocky.github.io/core-ai/ja/"
+  },
   "llms_url": "https://john-rocky.github.io/core-ai/llms.txt",
   "reviewed_at": "2026-09-14",
   "review_scope": "Public resource links and published evidence; no new runtime validation.",
@@ -100,6 +104,25 @@
       "url": "https://john-rocky.github.io/coreai-kit/docs/COOKBOOK.html",
       "requirements": [
         "Each task has its own API, model and platform requirements; consult the selected example and card"
+      ]
+    },
+    {
+      "id": "integrate-coreai",
+      "type": "agent-skill-source",
+      "title": "Integrate a local model into a Swift app",
+      "use_cases": [
+        "Add local chat, vision or speech to an existing Swift app",
+        "Resolve the selected package release's model ID and device variant",
+        "Implement first-download handling and follow-up turns"
+      ],
+      "url": "https://raw.githubusercontent.com/john-rocky/coreai-kit-skills/main/skills/integrate-coreai/SKILL.md",
+      "media_type": "text/plain",
+      "repository_url": "https://github.com/john-rocky/coreai-kit-skills",
+      "install_command": "npx skills@1.5.26 add john-rocky/coreai-kit-skills --skill integrate-coreai --agent codex --copy --yes",
+      "requirements": [
+        "Run the install command from the app project; it selects Codex at project scope",
+        "The metadata helper needs Python 3.9+ and the standard library",
+        "Installing the skill does not install CoreAIKit or download model weights; follow the selected release's requirements"
       ]
     },
     {
@@ -264,6 +287,7 @@
       "resource_ids": [
         "kit-release-guide",
         "kit-release-validation",
+        "integrate-coreai",
         "kit-agent-guide",
         "kit-release-catalog"
       ]
@@ -273,6 +297,7 @@
       "resource_ids": [
         "kit-cookbook",
         "kit-doc-index",
+        "integrate-coreai",
         "kit-agent-guide",
         "kit-release-catalog"
       ]

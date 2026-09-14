@@ -5,6 +5,7 @@
 > model revisions, licenses and validation evidence. This directory is a router, not a model catalog.
 
 - [Human starting page](https://john-rocky.github.io/core-ai/)
+- [Japanese starting page](https://john-rocky.github.io/core-ai/ja/): app previews, Swift integration, model selection and agent installation in Japanese.
 - [Machine-readable resource manifest](https://john-rocky.github.io/core-ai/resources.json): resource IDs, types, use cases, URLs, requirements and evidence. Task routes reference these IDs.
 
 ## Try an app without building
@@ -14,6 +15,7 @@
 
 ## Add local AI to a Swift app
 
+- [Installable integrate-coreai skill, plain Markdown](https://raw.githubusercontent.com/john-rocky/coreai-kit-skills/main/skills/integrate-coreai/SKILL.md): add local chat, vision or speech to an existing Swift app; select the package release, resolve its exact model ID and device variant, and handle downloads and follow-up turns. [Installation and metadata helper](https://github.com/john-rocky/coreai-kit-skills). The helper needs Python 3.9+ and reads the selected release's public catalog without downloading model weights.
 - [CoreAIKit 0.4.1 README, plain Markdown](https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/README.md): exact dependency, first-use download and chat starter.
 - [0.4.1 validation and setup, plain Markdown](https://raw.githubusercontent.com/john-rocky/coreai-kit/0.4.1/docs/GETTING_STARTED.md): tested hardware, OS/SDK builds, model pins, follow-up turns and download handling.
 - [Task cookbook](https://john-rocky.github.io/coreai-kit/docs/COOKBOOK.html): choose transcription, speaker diarization, PII redaction, OCR, image tasks, speech synthesis, semantic search or forecasting; each task links its API and example.
